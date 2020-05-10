@@ -1,44 +1,55 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Okta React + Okta Hosted Login TypeScript Example
 
-## Available Scripts
+This is a partially completed TypeScript conversion of the [Okta Hosted Login](https://github.com/okta/samples-js-react/tree/master/okta-hosted-login) code sample.
+This example was built with [Create React App][].
+Uses a modified version of the types defined by @danursin in the [following PR](https://github.com/okta/okta-oidc-js/pull/600).
+The types do not support [@okta/okta-react](https://www.npmjs.com/package/@okta/okta-react) custom Hooks.
 
-In the project directory, you can run:
+## Prerequisites
 
-### `yarn start`
+Before running this sample, you will need the following:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* An Okta Developer Account, you can sign up for one at https://developer.okta.com/signup/.
+* An Okta Application, configured for Single-Page App (SPA) mode.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Running This Example
 
-### `yarn test`
+To run this application, you first need to clone this repo and then enter into this directory:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+git clone https://github.com/r3core/octa-hosted-login-react-typescript.git
+```
 
-### `yarn build`
+Then install dependencies:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm install
+```
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Now you need to gather the following information from the Okta Developer Console:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Client Id** - The client ID of the SPA application that you created earlier.
+- **Issuer** - This is the URL of the authorization server that will perform authentication.
 
-### `yarn eject`
+These values must exist as environment variables. They can be exported in the shell, or saved in a file named `.env`, at the root of this repository.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```ini
+REACT_APP_ISSUER=https://yourOktaDomain.com/oauth2/default
+REACT_APP_CLIENT_ID=123xxxxx123
+REACT_APP_PORT=8080
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+With variables set, start the app server:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+npm start
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Now navigate to http://localhost:8080 in your browser.
 
-## Learn More
+If you see a home page that prompts you to login, then things are working!  Clicking the **Log in** button will redirect you to the Okta hosted sign-in page.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+[Create React App]: https://github.com/facebook/create-react-app
+[Okta React Library]: https://github.com/okta/okta-oidc-js/tree/master/packages/okta-react
+[OIDC SPA Setup Instructions]: https://developer.okta.com/docs/guides/sign-into-spa/react/before-you-begin
+[PKCE Flow]: https://developer.okta.com/docs/guides/implement-auth-code-pkce
